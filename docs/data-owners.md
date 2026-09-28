@@ -130,7 +130,7 @@ redistribution of reads and genotypes.
 
 | Cohort | Consent permits controlled redistribution of participant-level data | Authority to host on AWS infrastructure outside the source institution | Authority to release to approved third-party researchers | Cross-border transfer permitted (applicants outside Korea) | Determination date / signatory |
 |---|---|---|---|---|---|
-| National Integrated Bio-Big Data (KOBIC) | Yes | Yes | Yes | Yes | 2026-08, confirmed to the PI |
+| National Integrated Bio-Big Data (KOBIC) | Yes, per-sample gVCF and genotypes only (read-level data excluded) | Yes | Yes | Yes | 2026-08, confirmed to the PI; read-level scope clarified 2026-09-28 |
 | Jeju Genome | Yes | Yes | Yes | Yes | 2026-08, confirmed to the PI |
 | Korea4K | Yes | Yes | Yes | Yes | 2026-08, confirmed to the PI |
 | Korea10K | Yes | Yes | Yes | Yes | 2026-08, confirmed to the PI |

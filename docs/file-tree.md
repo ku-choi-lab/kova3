@@ -108,7 +108,9 @@ s3://kova3-controlled/
 ```
 
 A sample appears under `fastq/`, under `cram/`, or under both, depending on
-what the contributing cohort holds. No sample is present in neither. See
+what the contributing cohort holds. Every sample appears under `gvcf/`. Samples
+from the National Integrated Bio-Big Data (KOBIC) cohort appear under `gvcf/`
+only, because read-level data for that cohort are not redistributed. See
 [cohorts.md](cohorts.md) for the per-cohort breakdown.
 
 ---

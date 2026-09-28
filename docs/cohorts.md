@@ -55,17 +55,18 @@ sample. This determines what a controlled-tier applicant receives.
 
 | Cohort | Records | FASTQ | CRAM | Notes |
 |---|---:|---|---|---|
-| National Integrated Bio-Big Data (KOBIC) | 4,739 | No | *Reported* | Reported as CRAM; holdings not yet reconciled against the delivered inventory |
+| National Integrated Bio-Big Data (KOBIC) | 4,739 | Not distributed | Not distributed | The data owner does not permit redistribution of read-level data; per-sample gVCF only |
 | Jeju Genome | 2,987 | No | Yes | Aligned CRAM with CRAI for every sample |
 | Korea4K | 1,661 | Yes | Yes | FASTQ and aligned CRAM both held; see below |
-| Korea10K | 1,601 | Yes | No | No CRAM exists for this cohort |
+| Korea10K | 1,601 | Yes | Yes (in preparation) | FASTQ held; aligned CRAM being prepared by KOBIC |
 
 **All CRAM KOVA3 publishes is aligned.** It is coordinate-sorted against
 GRCh38 and carries a CRAI index, so a single locus can be streamed without
 downloading the file. Korea4K CRAM is DRAGEN output against an alt-masked
-GRCh38; Jeju CRAM arrives aligned and indexed from the sequencing provider. The
-KOBIC holdings are reported as CRAM but have not yet been reconciled against
-the delivered inventory, and that row is confirmed before release.
+GRCh38; Jeju CRAM arrives aligned and indexed from the sequencing provider;
+Korea10K CRAM is DRAGEN output prepared by KOBIC. Read-level data for the
+National Integrated Bio-Big Data (KOBIC) cohort are not redistributed: the data
+owner permits per-sample gVCF in the controlled tier but not CRAM or FASTQ.
 
 Korea4K also exists as unaligned CRAM, the original EGA deposit, and that is
 **not** what KOVA3 publishes. The distinction is not visible in the filename:

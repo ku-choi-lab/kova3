@@ -23,6 +23,13 @@ Outstanding before launch:
   sample to an ancestry cluster
 - Reconciliation of the data dictionary against the produced VCF header
 - Per-sample manifest of read-level formats held for the controlled tier
+
+Changed:
+
+- Controlled tier: read-level data (FASTQ, CRAM) are excluded for the National
+  Integrated Bio-Big Data (KOBIC) cohort at the data owner's request; its
+  per-sample gVCF and multi-sample VCF genotypes remain. Korea10K CRAM is being
+  prepared in addition to FASTQ.
 - Tutorial notebooks
 - S3 buckets and Registry of Open Data entry
 

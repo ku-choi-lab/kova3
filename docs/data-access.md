@@ -13,7 +13,7 @@ KOVA3 is released in two tiers.
 | Tier | Contents | How to get it |
 |---|---|---|
 | **Open** | Allele-frequency callset. Sites-only VCF, Parquet, Hail Table, callability resources, aggregate cohort metadata. No participant-level genotypes. | Download directly. No registration, no agreement, no approval. See the [README](../README.md). |
-| **Controlled** | Participant-level data: FASTQ, CRAM, per-sample gVCF, and the genotyped multi-sample VCF. | Apply as described on this page. |
+| **Controlled** | Participant-level data: FASTQ, CRAM, per-sample gVCF, and the genotyped multi-sample VCF. Read-level data (FASTQ, CRAM) are not available for the KOBIC cohort. | Apply as described on this page. |
 
 **Most users need only the open tier.** If your work is variant frequency
 filtering, ACMG/AMP evidence assignment, carrier-frequency estimation, or
@@ -225,7 +225,8 @@ read-level data. Downloading the full read-level collection is neither
 necessary for most analyses nor practical.
 
 Read-level format varies by cohort and by sample. Some samples have CRAM, some
-have FASTQ, and some have both. A per-sample manifest published with the
+have FASTQ, and some have both. The National Integrated Bio-Big Data (KOBIC)
+cohort has no read-level data in the controlled tier, only per-sample gVCF. A per-sample manifest published with the
 release states which formats exist for each sample; consult it when planning an
 analysis. All published CRAM is aligned to GRCh38 and carries a CRAI index, so
 a single locus can be streamed without downloading the file.
