@@ -76,42 +76,41 @@ see [methods.md](methods.md#callability).
 ## Controlled-tier bucket layout
 
 Readable only with credentials issued after an application is approved. The
-per-sample manifest is the entry point: read-level format varies by sample, so
-resolve availability from the manifest rather than by listing the bucket.
+per-sample manifest is the entry point: formats and object names vary by
+cohort, so resolve each sample's objects from the manifest rather than by
+listing the bucket or by matching key patterns.
 
 ```
 s3://kova3-controlled/
 ├── manifest/
-│   ├── samples.tsv                    # One row per sample: cohort, formats held, object keys
+│   ├── samples.tsv                    # One row per sample: cohort, formats held, object keys, checksums
 │   └── samples.parquet
 │
-├── fastq/
-│   └── <COHORT>/<SAMPLE>/             # Paired-end, gzip-compressed
-│       ├── <SAMPLE>_R1.fastq.gz
-│       └── <SAMPLE>_R2.fastq.gz
-│
-├── cram/
-│   └── <COHORT>/<SAMPLE>/             # Aligned, coordinate-sorted CRAM 3.0 on GRCh38
-│       ├── <SAMPLE>.cram              # Renamed at upload; see cohorts.md
-│       └── <SAMPLE>.cram.crai
-│
-├── gvcf/
-│   └── <COHORT>/<SAMPLE>/
-│       ├── <SAMPLE>.g.vcf.gz
-│       └── <SAMPLE>.g.vcf.gz.tbi
-│
-└── msvcf/
-    └── release=v3.0.0/             # Genotyped multi-sample VCF, chromosome-sharded
-        ├── kova3.chr1.vcf.gz
-        ├── kova3.chr1.vcf.gz.tbi
-        └── ...
+└── data/
+    ├── <cohort>/                      # jeju, korea4k, korea10k, kobic
+    │   ├── fastq/...                  # Paired-end, gzip-compressed, where held
+    │   ├── cram/...                   # Aligned, coordinate-sorted CRAM 3.0 on GRCh38, with .crai
+    │   └── gvcf/...                   # bgzip-compressed per-sample gVCF, with .tbi
+    │
+    └── msvcf/
+        └── release=v3.0.0/            # Genotyped multi-sample VCF, chromosome-sharded
+            ├── kova3.chr1.vcf.gz
+            ├── kova3.chr1.vcf.gz.tbi
+            └── ...
 ```
 
-A sample appears under `fastq/`, under `cram/`, or under both, depending on
-what the contributing cohort holds. Every sample appears under `gvcf/`. Samples
-from the National Integrated Bio-Big Data (KOBIC) cohort appear under `gvcf/`
-only, because read-level data for that cohort are not redistributed. See
-[cohorts.md](cohorts.md) for the per-cohort breakdown.
+Below each format folder, objects keep the folder structure and file names
+produced by the contributing cohort's pipeline (for example
+`<SAMPLE>.hard-filtered.gvcf.gz`), so key patterns differ between cohorts.
+Korea4K is the exception: its objects are renamed at upload because the source
+file names do not reflect their content (see [cohorts.md](cohorts.md)). The
+manifest records each object's key and source path.
+
+A sample has `fastq/`, `cram/`, or both, depending on what the contributing
+cohort holds. Every sample has `gvcf/`. Samples from the National Integrated
+Bio-Big Data (KOBIC) cohort have `gvcf/` only, because read-level data for that
+cohort are not redistributed. See [cohorts.md](cohorts.md) for the per-cohort
+breakdown.
 
 ---
 
@@ -124,6 +123,7 @@ only, because read-level data for that cohort are not redistributed. See
 | VCF shard | `kova3.<contig>.sites.vcf.gz` | `kova3.chr7.sites.vcf.gz` |
 | Contig naming | GRCh38, `chr`-prefixed | `chr1`, `chrX` |
 | Partition keys | lowercase, `key=value` | `chromosome=chr1` |
+| Cohort folder (controlled tier) | lowercase cohort slug | `data/jeju/` |
 
 Paths are **immutable once published**. A correction produces a new release
 prefix; it never rewrites an existing one. This lets downstream pipelines pin a
@@ -151,6 +151,11 @@ the longest GRCh38 contig, chr1, is 249 Mb, well inside that limit. Publishing
 per-sample genotype columns, which a sites-only callset does not have, so it
 buys little here while costing the wide tool compatibility that bgzip-compressed
 VCF has. Users who prefer BCF can convert locally with `bcftools view -Ob`.
+
+**Provider file names kept in the controlled tier.** Participant-level objects
+are copied from the cohorts' storage without renaming, which avoids a second
+full copy of several hundred terabytes and keeps each object traceable to its
+source. The manifest, not the key, identifies the sample.
 
 **Top-level `data/`, `metadata/`, `docs/` prefixes with a README at the root.**
 This follows the layout recommended in the AWS Open Data onboarding handbook,
