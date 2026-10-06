@@ -57,8 +57,8 @@ sample. This determines what a controlled-tier applicant receives.
 |---|---:|---|---|---|
 | National Integrated Bio-Big Data (KOBIC) | 4,739 | Not distributed | Not distributed | The data owner does not permit redistribution of read-level data; per-sample gVCF only |
 | Jeju Genome | 2,987 | No | Yes | Aligned CRAM with CRAI for every sample |
-| Korea4K | 1,661 | Yes | Yes | FASTQ and aligned CRAM both held; see below |
-| Korea10K | 1,601 | Yes | Yes (in preparation) | FASTQ held; aligned CRAM being prepared by KOBIC |
+| Korea4K | 1,661 | Not distributed | Yes | Aligned CRAM only; see below |
+| Korea10K | 1,601 | Not distributed | Yes (in preparation) | Aligned CRAM being prepared by KOBIC |
 
 **All CRAM KOVA3 publishes is aligned.** It is coordinate-sorted against
 GRCh38 and carries a CRAI index, so a single locus can be streamed without
@@ -67,15 +67,20 @@ GRCh38; Jeju CRAM arrives aligned and indexed from the sequencing provider;
 Korea10K CRAM is DRAGEN output prepared by KOBIC. Read-level data for the
 National Integrated Bio-Big Data (KOBIC) cohort are not redistributed: the data
 owner permits per-sample gVCF in the controlled tier but not CRAM or FASTQ.
+FASTQ is not distributed for any cohort: read-level data in the controlled
+tier are aligned CRAM only.
 
 Korea4K also exists as unaligned CRAM, the original EGA deposit, and that is
 **not** what KOVA3 publishes. The distinction is not visible in the filename:
 a substantial number of the aligned DRAGEN outputs are still called
 `*_unaligned.cram`, because DRAGEN was invoked with
 `--output-file-prefix` set to the input basename. Selecting or excluding files
-by that substring gets the answer wrong in both directions. The published
-objects are renamed to `<SAMPLE>.cram` at upload, and the per-sample manifest
-records the source path.
+by that substring gets the answer wrong in both directions. Published objects
+keep the file names produced by the pipeline, so a Korea4K CRAM may be named
+`<SAMPLE>.cram` or `<SAMPLE>_L1_unaligned.cram`. In some of these files the
+read-group sample name (`@RG SM`) is the original sequencing ID rather than the
+Korea4K sample ID. The per-sample manifest maps every object to its KOVA3
+sample; resolve samples from the manifest, not from file names or CRAM headers.
 
 Per-sample gVCF exists for every cohort. The genotyped multi-sample VCF covers
 all 10,988 records. A per-sample manifest published with the controlled tier

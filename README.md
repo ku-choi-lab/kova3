@@ -59,9 +59,8 @@ field list and for how these map onto the joint genotyping output.
 ### The controlled tier
 
 Everything above is the **open tier**. The participant-level data behind it are
-released as a **controlled tier**: FASTQ, CRAM, per-sample gVCF, and the
-genotyped multi-sample VCF, for the same cohort. Read-level data (FASTQ, CRAM)
-are not available for the National Integrated Bio-Big Data (KOBIC) cohort; for
+released as a **controlled tier**: aligned CRAM, per-sample gVCF, and the
+genotyped multi-sample VCF, for the same cohort. CRAM is not available for the National Integrated Bio-Big Data (KOBIC) cohort; for
 those 4,739 genomes the controlled tier holds per-sample gVCF and their genotypes
 in the multi-sample VCF.
 

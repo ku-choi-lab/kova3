@@ -88,7 +88,6 @@ s3://kova3-controlled/
 │
 └── data/
     ├── <cohort>/                      # jeju, korea4k, korea10k, kobic
-    │   ├── fastq/...                  # Paired-end, gzip-compressed, where held
     │   ├── cram/...                   # Aligned, coordinate-sorted CRAM 3.0 on GRCh38, with .crai
     │   └── gvcf/...                   # bgzip-compressed per-sample gVCF, with .tbi
     │
@@ -102,12 +101,12 @@ s3://kova3-controlled/
 Below each format folder, objects keep the folder structure and file names
 produced by the contributing cohort's pipeline (for example
 `<SAMPLE>.hard-filtered.gvcf.gz`), so key patterns differ between cohorts.
-Korea4K is the exception: its objects are renamed at upload because the source
-file names do not reflect their content (see [cohorts.md](cohorts.md)). The
-manifest records each object's key and source path.
+This includes Korea4K, whose file names do not always reflect their content
+(see [cohorts.md](cohorts.md)). The manifest records each object's key and the
+KOVA3 sample it belongs to.
 
-A sample has `fastq/`, `cram/`, or both, depending on what the contributing
-cohort holds. Every sample has `gvcf/`. Samples from the National Integrated
+A sample has `cram/` where the contributing cohort's aligned CRAM is released,
+and every sample has `gvcf/`. FASTQ is not distributed. Samples from the National Integrated
 Bio-Big Data (KOBIC) cohort have `gvcf/` only, because read-level data for that
 cohort are not redistributed. See [cohorts.md](cohorts.md) for the per-cohort
 breakdown.

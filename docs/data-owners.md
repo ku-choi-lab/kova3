@@ -16,7 +16,7 @@ No additional restrictions apply to the open tier. There is no registration, no
 data access agreement, no fee, and no approval step. Access requires no AWS
 account.
 
-The **controlled tier** is not covered by CC BY 4.0. Participant-level FASTQ,
+The **controlled tier** is not covered by CC BY 4.0. Participant-level
 CRAM, per-sample gVCF, and the genotyped multi-sample VCF are released under the
 KOVA3 Data Use Agreement, at no cost, to academic researchers for non-commercial
 research. The agreement prohibits redistribution and re-identification. See
