@@ -29,10 +29,12 @@ Changed:
 - Controlled tier: read-level data (FASTQ, CRAM) are excluded for the National
   Integrated Bio-Big Data (KOBIC) cohort at the data owner's request; its
   per-sample gVCF and multi-sample VCF genotypes remain. Korea10K CRAM is being
-  prepared in addition to FASTQ.
+  prepared by KOBIC.
+- Controlled tier: read-level data are aligned CRAM only; FASTQ is not
+  distributed for any cohort.
 - Controlled tier layout: participant-level objects are grouped by cohort under
-  `data/<cohort>/{fastq,cram,gvcf}/` and keep the provider's file names
-  (Korea4K renamed at upload); the per-sample manifest maps samples to keys.
+  `data/<cohort>/{cram,gvcf}/` and keep the provider's file names, including
+  Korea4K; the per-sample manifest maps samples to keys.
 - Tutorial notebooks
 - S3 buckets and Registry of Open Data entry
 
